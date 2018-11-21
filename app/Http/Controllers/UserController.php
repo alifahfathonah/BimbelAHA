@@ -15,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::orderBy('id_user','ASC')->get();
+        return view('userCRUD.index',compact('users'));
     }
 
     /**
@@ -25,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('userCRUD.create');
     }
 
     /**
@@ -36,7 +37,25 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,
+        ['username' => 'required',
+         'password' => 'required',
+         'nama' => 'required',
+         'alamat' => 'required',
+         'no_hp' => 'required',
+         'asal_sekolah' => 'required',
+         'email' => 'required']);
+
+         if($request->password != $request->cnf_psw)
+		{
+			return redirect()->back()->with('alert', 'Password harus sama');
+        }
+        else
+        {
+            User::create($request->all());
+            return redirect()->route('User.index')->with('success','Item created successfully');
+        }
+       
     }
 
     /**
@@ -47,7 +66,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $users=User::find($id);
+        return view ('userCRUD.show',compact('users'));
+
     }
 
     /**
@@ -58,7 +79,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $users = User::find($id);
+        return view('userCRUD.edit',compact('users'));
     }
 
     /**
@@ -71,6 +93,10 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, ['username' => 'required']);
+
+        User::find($id)->update($request->all());
+        return redirect()->route('User.index')->with('success','Item Updated Successfully');
     }
 
     /**
@@ -79,8 +105,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_user)
     {
-        //
+        User::find($id_user)->delete();
+        return redirect()->route('User.index')->with('success','Item Deleted Successfully');
     }
 }

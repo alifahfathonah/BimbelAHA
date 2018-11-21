@@ -37,7 +37,7 @@
 		<a class="btn btn-info" href="{{ route('Jadwal.show',$jadwal->id_jadwal) }}">Show</a>
 		<a class="btn btn-primary" href="{{ route('Jadwal.edit',$jadwal->id_jadwal )}}">Edit</a>
 		{!! Form::open(['method' => 'Delete', 'route'
-						=>['Jadwal.destroy',$jadwal->id],'style'=>'display:inline']) !!}
+						=>['Jadwal.destroy',$jadwal->id_jadwal],'style'=>'display:inline']) !!}
 		{!! Form::submit('Delete',['class' => 'btn btn-danger']) !!}
 		{!! Form::close() !!}
 	</td>

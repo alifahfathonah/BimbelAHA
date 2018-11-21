@@ -28,8 +28,12 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12">
 			<div class="form-group">
-				<strong> Jadwal : </strong>
-				{!! Form::text('nama_mapel',null, array('placeholder' => 'Fill with name of the subject','class' => 'form-control')) !!}
+				<strong> Nama Mapel : </strong>
+				{!! Form::text('nama_mapel',null, array('placeholder' => 'Masukan nama mapel les','class' => 'form-control')) !!}
+				<strong> Hari : </strong>
+				{!! Form::text('hari',null, array('placeholder' => 'Masukan hari les','class' => 'form-control')) !!}
+				<strong> Jam : </strong>
+				{!! Form::text('jam',null, array('placeholder' => 'Masukan jam les','class' => 'form-control')) !!}
 			</div>
 		</div>
 

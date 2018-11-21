@@ -20,6 +20,7 @@ class CreateTransaksiTable extends Migration
             $table->integer('id_jadwal')->unsigned();
             $table->foreign('id_jadwal')->references('id_jadwal')->on('jadwals');
             $table->integer('status_bayar')->unsigned();
+            $table->timestamps();
         });
     }
 

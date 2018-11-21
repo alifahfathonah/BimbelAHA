@@ -22,7 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('no_hp');
             $table->string('asal_sekolah');
             $table->string('email')->unique();
-            $table->integer('verif_email')->unsigned();
+            $table->integer('verif_email')->default(0);
+            $table->timestamps();
         });
     }
 
