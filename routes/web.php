@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('Jadwal','JadwalController');
+Route::resource('Transaksi','TransaksiController');
+Route::resource('User','UserController');

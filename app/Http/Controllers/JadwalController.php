@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Jadwal;
 
 class JadwalController extends Controller
 {
@@ -13,7 +15,8 @@ class JadwalController extends Controller
      */
     public function index()
     {
-        //
+        $jadwals = Jadwal::orderBy('id','ASC')->get();
+        return view('jadwalCRUD.index',compact('jadwals'));
     }
 
     /**
@@ -23,7 +26,7 @@ class JadwalController extends Controller
      */
     public function create()
     {
-        //
+        return view('jadwalCRUD.create');
     }
 
     /**
@@ -34,7 +37,11 @@ class JadwalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, ['nama_mapel' => required]);
+
+        Jadwal::create($request->all());
+
+        return redirect()->route('Jadwal.index')->with('success','Item created successfully');
     }
 
     /**
@@ -45,7 +52,8 @@ class JadwalController extends Controller
      */
     public function show($id)
     {
-        //
+        $jadwals=Jadwal::find($id);
+        return view ('jadwalCRUD.show',compact('jadwals'));
     }
 
     /**
@@ -57,6 +65,8 @@ class JadwalController extends Controller
     public function edit($id)
     {
         //
+        $jadwals = Jadwal::find($id);
+        return view('jadwalCRUD.edit',compact('jadwals'));
     }
 
     /**
@@ -69,6 +79,10 @@ class JadwalController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, ['nama_mapel' => 'required']);
+
+        Jadwal::find($id)->update($request->all());
+        return redirect()->route('Jadwal.index')->with('success','Item Updated Successfully');
     }
 
     /**
@@ -80,5 +94,7 @@ class JadwalController extends Controller
     public function destroy($id)
     {
         //
+        Jadwal::find($id)->delete();
+        return redirect()->route('Jadwal.index')->with('success','Item Deleted Successfully');
     }
 }
