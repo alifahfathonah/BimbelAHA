@@ -15,7 +15,7 @@ class JadwalController extends Controller
      */
     public function index()
     {
-        $jadwals = Jadwal::orderBy('id','ASC')->get();
+        $jadwals = Jadwal::orderBy('id_jadwal','ASC')->get();
         return view('jadwalCRUD.index',compact('jadwals'));
     }
 
@@ -37,10 +37,12 @@ class JadwalController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['nama_mapel' => required]);
-
+        $this->validate($request,
+        ['nama_mapel' => 'required',
+         'hari' => 'required',
+         'jam' => 'required']);
+        
         Jadwal::create($request->all());
-
         return redirect()->route('Jadwal.index')->with('success','Item created successfully');
     }
 
@@ -50,9 +52,9 @@ class JadwalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_mapel)
     {
-        $jadwals=Jadwal::find($id);
+        $jadwals=Jadwal::find($id_mapel);
         return view ('jadwalCRUD.show',compact('jadwals'));
     }
 
@@ -76,12 +78,12 @@ class JadwalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_mapel)
     {
         //
         $this->validate($request, ['nama_mapel' => 'required']);
 
-        Jadwal::find($id)->update($request->all());
+        Jadwal::find($id_mapel)->update($request->all());
         return redirect()->route('Jadwal.index')->with('success','Item Updated Successfully');
     }
 
@@ -91,10 +93,10 @@ class JadwalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_mapel)
     {
         //
-        Jadwal::find($id)->delete();
+        Jadwal::find($id_mapel)->delete();
         return redirect()->route('Jadwal.index')->with('success','Item Deleted Successfully');
     }
 }

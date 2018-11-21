@@ -34,8 +34,8 @@
     <td>{{ $jadwal->hari }}</td>
     <td>{{ $jadwal->jam }}</td>
 	<td>
-		<a class="btn btn-info" href="{{ route('Jadwal.show',$jadwal->id) }}">Show</a>
-		<a class="btn btn-primary" href="{{ route('Jadwal.edit',$jadwal->id )}}">Edit</a>
+		<a class="btn btn-info" href="{{ route('Jadwal.show',$jadwal->id_jadwal) }}">Show</a>
+		<a class="btn btn-primary" href="{{ route('Jadwal.edit',$jadwal->id_jadwal )}}">Edit</a>
 		{!! Form::open(['method' => 'Delete', 'route'
 						=>['Jadwal.destroy',$jadwal->id],'style'=>'display:inline']) !!}
 		{!! Form::submit('Delete',['class' => 'btn btn-danger']) !!}
