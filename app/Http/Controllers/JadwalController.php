@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Jadwal;
-//use Alert;
+use Alert;
 class JadwalController extends Controller
 {
     /**
@@ -43,8 +43,8 @@ class JadwalController extends Controller
          'jam' => 'required']);
         
         Jadwal::create($request->all());
-      //  Alert::success('Good job!')->persistent("Close")->autoclose(4000);
-
+        Alert::success('Good job!')->persistent("Close")->autoclose(4000);
+ 
         return redirect()->route('Jadwal.index')->with('success','Item created successfully');
 
     }
